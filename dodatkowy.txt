@@ -1,0 +1,2 @@
+To jest plik, który ma być ignorowany.
+
