@@ -124,9 +124,9 @@ where indicatorname ilike '%CO2%metric%')
 
 with percentyle as
 (
-   select percentile_disc(0.25) within group (order by co2) as p25, --0,54%
-   		percentile_disc(0.5) within group (order by co2) as p50, --2,22%
-          percentile_disc(0.75) within group (order by co2) as p75 -- 6,74%
+   select percentile_disc(0.25) within group (order by co2) as p25, --0,54
+   		percentile_disc(0.5) within group (order by co2) as p50, --2,22
+          percentile_disc(0.75) within group (order by co2) as p75 -- 6,74
    from CO2
 )
 select * from percentyle p
@@ -195,4 +195,15 @@ order by "Year" desc, fossil desc)
 select * from pom3 p3
 join pomocnicza p on p.shortname = p3.shortname
 where p."Year"=p3."Year"
+
+-- korelacja miêdzy PKB a % energii z paliw kopalnych
+
+with pom3 as (select * from fossil f 
+where shortname in ('China', 'United States', 'India', 'Japan', 'Germany') and "Year" < 2013
+order by "Year" desc, fossil desc)
+select round(corr(p.pkb , p3.fossil)::numeric,2) from pom3 p3
+join pomocnicza p on p.shortname = p3.shortname
+where p."Year"=p3."Year"
+
+
 
