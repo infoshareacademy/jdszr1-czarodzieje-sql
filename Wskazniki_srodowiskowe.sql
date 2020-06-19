@@ -133,7 +133,7 @@ select * from percentyle p
 
 select avg(co2) from CO2 -- 4,73% - œrednia dla wszystkich pañstw we wszystkich latach
 
--- a teraz nasze wybrane kraje rok po roku (korzystamy z poprzedniej tabeli pomocniczej z PKB i doklejamy do niej z tabelê z oze)
+-- a teraz nasze wybrane kraje rok po roku (korzystamy z poprzedniej tabeli pomocniczej z PKB i doklejamy do niej z tabelê z CO2)
 
 with pom2 as (select * from CO2 as c
 where shortname in ('China', 'United States', 'India', 'Japan', 'Germany') and "Year" < 2013
