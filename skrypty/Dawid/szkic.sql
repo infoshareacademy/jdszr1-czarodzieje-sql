@@ -1,14 +1,20 @@
 --PRZYGOTOWANIE TABEL Z DANYMI MAJ¥CYMI NA CELU USTALENIE KORELACJI WZROSTU BOGACTWA I ROZWOJU
 
 --Wyszukiwanie interesuj¹cych nas wskaŸników, na podstawie których sprawdzimy ogólnie rozwój pañstwa
-select distinct i.indicatorname from indicators i 
+select distinct indicatorname from bazafin b 
 where indicatorname ilike '%research%' or 
 indicatorname ilike '%export%' or 
-indicatorname ilike '%R%&%D%' 
+indicatorname ilike '%R%&%D%' or 
+indicatorname ilike '%trade%'
+
 --Technicians in R&D (per million people), 
 --Researchers in R&D (per million people), 
 --Research and development expenditure (% of GDP) - ,}te dwa wskaŸniki interesuj¹ nas najbardziej
 --Exports of goods and services (BoP, current US$) - }
+--Goods exports (BoP, current US$)
+--Trade in services (% of GDP)
+--Exports of goods and services (% of GDP)
+--Trade (% of GDP)
 
 --Wyszukiawnie wskaŸnika PKB per capita pozwalaj¹cego porównaæ kraje
 select distinct indicatorname from indicators i
@@ -19,6 +25,7 @@ where indicatorname ilike '%GDP%per%capita%'
 create table pkb_percapita as (
 select * from bazafin b2 
 where indicatorname ilike 'GDP per capita, PPP (current international $)')
+and indo
 
 --Stworzenie tabeli zawierj¹cej ekwiwalent wolumenu eksportu dla krajów od 1989 roku
 create table rozwoj_eksport as (
@@ -60,6 +67,22 @@ group by shortname
 having min("lag") is not null
 order by avg("value") desc)
 ---------------------
+select shortname , "Year", "value" , 
+lag("Year", 5) over (partition by shortname order by "Year") , 
+lag("value", 5) over (partition by shortname order by "Year") from bazafin b
+where indicatorname ilike 'GDP per capita, PPP (current international $)' --przyk³¹dowy wskaŸnik
+
+select shortname , "Year", "value" , 
+lag("Year") over (partition by shortname order by "Year") , 
+lag("value") over (partition by shortname order by "Year") from bazafin b
+where indicatorname ilike 'GDP per capita, PPP (current international $)' --przyk³¹dowy wskaŸnik
+and "Year" in (1990, 1995, 2000, 2005, 2010, 2013)
+
+select shortname , "Year", "value" , 
+lag("Year") over (partition by shortname order by "Year") , 
+lag("value") over (partition by shortname order by "Year") from bazafin b
+where indicatorname ilike 'GDP per capita, PPP (current international $)' --przyk³¹dowy wskaŸnik
+and "Year" in (1990, 2013)
 
 
 
