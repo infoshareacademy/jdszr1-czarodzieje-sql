@@ -1,9 +1,11 @@
+--wybór co pi¹tego roku dla przyk³adowego wskaŸnika
 select shortname , "Year", "value" , 
 lag("Year") over (partition by shortname order by "Year") , 
 lag("value") over (partition by shortname order by "Year") from bazafin b
 where indicatorname ilike 'GDP per capita, PPP (current international $)' --przyk³¹dowy wskaŸnik
 and "Year" in (1990, 1995, 2000, 2005, 2010, 2013)
 
+--wybór otwieraj¹cego i zamykaj¹cego roku z wybranego przez nas przedzia³u
 select shortname , "Year", "value" , 
 lag("Year") over (partition by shortname order by "Year") , 
 lag("value") over (partition by shortname order by "Year") from bazafin b
