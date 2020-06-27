@@ -1,6 +1,6 @@
--- Country definition
+-- tworzymy tabele Country definition
 
-CREATE TABLE Country (
+create table Country (
     CountryCode TEXT,
     ShortName TEXT,
     TableName TEXT,
@@ -33,25 +33,25 @@ CREATE TABLE Country (
     LatestTradeData NUMERIC,
     LatestWaterWithdrawalData NUMERIC);
     
-   -- CountryNotes definition
+-- tworzymy tabele CountryNotes definition
 
-CREATE TABLE CountryNotes (
+create table countryNotes (
     Countrycode TEXT,
     Seriescode TEXT,
     Description TEXT);
      
-   -- Footnotes definition
+-- tworzymy tabele footnotes definition
 
-CREATE TABLE Footnotes (
+create table footnotes (
     Countrycode TEXT,
     Seriescode TEXT,
     Year TEXT,
     Description TEXT);
    
    
-  -- Indicators definition
+--tworzymy tabele Indicators definition
 
-CREATE TABLE Indicators (
+create table indicators (
     CountryName TEXT,
     CountryCode TEXT,
     IndicatorName TEXT,
@@ -59,15 +59,15 @@ CREATE TABLE Indicators (
     Year INTEGER,
     Value NUMERIC);
 
-CREATE INDEX indicators_CountryName_idx ON Indicators (CountryName);
-CREATE INDEX indicators_CountryCode_idx ON Indicators (CountryCode);
-CREATE INDEX indicators_IndicatorName_idx ON Indicators (IndicatorName);
-CREATE INDEX indicators_IndicatorCode_idx ON Indicators (IndicatorCode);
-CREATE INDEX indicators_Year_idx ON Indicators (Year);
+create index indicators_CountryName_idx on Indicators (CountryName);
+create index indicators_CountryCode_idx on Indicators (CountryCode);
+create index indicators_IndicatorName_idx on Indicators (IndicatorName);
+create index indicators_IndicatorCode_idx on Indicators (IndicatorCode);
+create index indicators_Year_idx on Indicators (Year);
 
--- Series definition
+--tworzenie tabeli series definition
 
-CREATE TABLE Series (
+create table series (
     SeriesCode TEXT,
     Topic TEXT,
     IndicatorName TEXT,
@@ -90,9 +90,9 @@ CREATE TABLE Series (
     LicenseType TEXT);
    
    
-   -- SeriesNotes definition
+--tworzenie tabeli Series Notes definition
 
-CREATE TABLE SeriesNotes (
+create table seriesNotes (
     Seriescode TEXT,
     Year TEXT,
     Description TEXT);
