@@ -1,1 +1,5 @@
-*.csv
+application_record.csv
+credit_record.csv
+debug.log
+Projekt.ipynb
+Projekt-checkpoint.ipynb 
