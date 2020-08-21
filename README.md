@@ -1,1 +1,0 @@
-# jdszr1-czarodzieje-sql
